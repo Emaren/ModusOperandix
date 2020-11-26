@@ -1,3 +1,40 @@
+<div class="card">
+  <div class="card-body">
+    <h1><span><%= @project.name %></span></h1>
+    <h2 class='card-title d-flex justify-content-between mb-4'>
+      <span>Tasks</span>
+      <%= link_to 'New Project', new_project_path, class: 'btn btn-primary' %>
+    </h2>
+
+    <% @tasks.each do |task| %>
+      <%= link_to task.project, class: 'text-decoration-none' do %>
+        <div class="card project-card mb-3">
+          <div class="card-body">
+            <div class="mb-3">
+
+                <tr>
+                  <td><%= task.name %></td>
+                  <td><%= task.description %></td>
+                  <td><%= task.status %></td>
+                  <td><%= task.project %></td>
+                  <td><%= link_to 'Show', [task.project, task] %></td>
+                  <td><%= link_to 'Edit', edit_project_task_path(task.project, task) %></td>
+                  <td><%= link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+
+            <h5 class='card-title text-dark'><b><%= task.name %></b></h5>
+            <p class='text-secondary'><%= task.description %></p>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+</div>
+</div>
+<br><br><br>
+
+
 <h1>Listing tasks</h1>
 
 <table>
@@ -10,7 +47,6 @@
     <th></th>
     <th></th>
   </tr>
-
 <% @tasks.each do |task| %>
   <tr>
     <td><%= task.name %></td>
@@ -26,4 +62,9 @@
 
 <br />
 
+<%= link_to 'New Project', new_project_path %>
+|
 <%= link_to 'New Task', new_project_task_path(params[:project_id]) %>
+<br>
+<%= link_to 'All Projects', projects_path %>
+<%= link_to 'All Tasks', project_tasks_path %>

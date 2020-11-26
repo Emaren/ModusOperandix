@@ -11,19 +11,41 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+  <div class="form-group"
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name, class: 'form-control', style: 'background-color: rgb(5, 62, 115); color: white' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :description %>
-    <%= form.text_area :description, class: 'form-control mb-3' %>
+    <%= form.text_area :description, class: 'form-control', style: 'background-color: rgb(5, 62, 115); color: white' %>
   </div>
-
-
 
   <div class="actions">
-    <%= form.submit class: "btn btn-primary" %>
+    <div class="field">
+      <%= form.label :user_id %>
+      <%= form.text_field :user_id, class: 'form-control mb-2', style: 'background-color: rgb(5, 62, 115); color: white' %>
+    </div>
+
+
+    <%= form.submit class: "btn mb-3", style: 'background-color: rgb(5, 62, 115); color: rgb(194, 196, 232)' %>
   </div>
+<% end %>
+
+<br>
+
+<%= form_with(model: project, local: true) do |form| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+        <% project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
 <% end %>

@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @task.title %>
-</p>
+<h3>Task</h3>
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title d-flex justify-content-between mb-4">
 
 <p>
   <b>Name:</b>
   <%= @task.name %>
 </p>
+</h2>
 
 <p>
   <b>Description:</b>
@@ -22,9 +22,33 @@
 
 <p>
   <b>Project:</b>
-  <%= @task.project %>
+  <%= @task.project.name %>
 </p>
 
+  <div class="mb-4">
 
-<%= link_to 'Edit', edit_project_task_path(@task.project, @task) %> |
-<%= link_to 'Back', project_tasks_path(@task.project) %>
+    <%= form_for([@task.project, @task]) do |f| %>
+    <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+
+    <% end %>
+  </div>
+
+
+
+
+<hr>
+
+<%= link_to 'Edit', edit_project_task_path(@task.project, @task), class: 'btn btn-info mb-2' %>
+<%= link_to 'New Task', new_project_task_path(@project.id), class: 'btn mb-2', style: 'background-color: rgb(5, 62, 115); color: rgb(194, 196, 232)' %>
+<%= link_to 'Projects', projects_path, class: 'btn btn-secondary mb-2' %>
